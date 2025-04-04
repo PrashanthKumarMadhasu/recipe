@@ -8,7 +8,7 @@ const Favorites = () => {
     const fetchFavorites = async () => {
       try {
         // Get saved favorites (ids and names) from server
-        const response = await axios.get("http://localhost:5000/favorites");
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/favorites`);
         const favorites = response.data;
 
         // For each favorite, fetch full meal details by ID

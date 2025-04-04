@@ -5,7 +5,15 @@ const cors = require("cors");
 const app = express();
 const PORT = 5000;
 
-app.use(cors());
+app.use(cors({
+  origin: [
+    "http://localhost:3000", // for local development
+    "https://recipe-sand-xi.vercel.app" // deployed frontend on vercel
+  ],
+  methods: ["GET", "POST", "DELETE", "PUT"],
+  credentials: true
+}));
+
 app.use(express.json());
 
 const filePath = "./favorites.json";

@@ -20,7 +20,7 @@ const RecipeDetail = () => {
         setRecipe(meal);
 
         // Now fetch favorites
-        const favResponse = await axios.get("http://localhost:5000/favorites");
+        const favResponse = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/favorites`);
         const favorites = favResponse.data;
 
         // Check if this meal is already in favorites
@@ -41,13 +41,13 @@ const RecipeDetail = () => {
     try {
       if (newFavState) {
         // Add to favorites
-        await axios.post("http://localhost:5000/favorites", {
+        await axios.post(`${process.env.REACT_APP_BACKEND_URL}/favorites`, {
           id: recipe.idMeal,
           name: recipe.strMeal,
         });
       } else {
         // Remove from favorites
-        await axios.delete(`http://localhost:5000/favorites/${recipe.idMeal}`);
+        await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/favorites/${recipe.idMeal}`);
       }
     } catch (error) {
       console.error("Error updating favorites:", error);
