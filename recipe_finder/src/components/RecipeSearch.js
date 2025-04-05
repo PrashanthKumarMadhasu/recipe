@@ -37,7 +37,7 @@ const RecipeSearch = () => {
         `https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`
       );
       setRecipes(response.data.meals || []);
-      setSuggestions([]); 
+      setSuggestions([]);
       setShowDropdown(false);
     } catch (error) {
       console.error("Error fetching recipes:", error);
@@ -56,21 +56,26 @@ const RecipeSearch = () => {
         <RecipeSlider />
       </div>
       <div className="search-container">
-        <input
-          type="text"
-          placeholder="Search recipes..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          onFocus={() => setShowDropdown(true)}
-          onBlur={() => setTimeout(() => setShowDropdown(false), 200)} 
-        />
-        <button onClick={handleSearch}>Search</button>
+        <div className="search-input">
+          <input
+            type="text"
+            placeholder="Search recipes..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onFocus={() => setShowDropdown(true)}
+            onBlur={() => setTimeout(() => setShowDropdown(false), 200)}
+          />
+          <button onClick={handleSearch} id="search-button">Search</button>
+        </div>
 
         {/* Suggestions Dropdown */}
         {showDropdown && suggestions.length > 0 && (
           <ul className="suggestions-dropdown">
             {suggestions.map((suggestion) => (
-              <li key={suggestion.idMeal} onMouseDown={() => handleSuggestionClick(suggestion.strMeal)}>
+              <li
+                key={suggestion.idMeal}
+                onMouseDown={() => handleSuggestionClick(suggestion.strMeal)}
+              >
                 {suggestion.strMeal}
               </li>
             ))}
